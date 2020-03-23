@@ -1,0 +1,51 @@
+﻿<Window x:Class="DataAnalysisTool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:winformhost="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"    
+        xmlns:oxy="http://oxyplot.org/wpf"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataAnalysisTool"
+        mc:Ignorable="d" WindowState="Maximized"
+        Title="DataAnalysisTool" Height="500" Width="800" Background="LightGray"  SizeChanged="Window_SizeChanged"
+        PreviewKeyDown="OnPreviewKeyDown" PreviewKeyUp="OnPreviewKeyUp" Icon="Image/TPAC.png">
+
+    <Grid x:Name="GRIDWINDOW">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65*"/>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*" MaxWidth="200" MinWidth="200"/>
+            <ColumnDefinition Width="90*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--ToolBar-->
+        <ScrollViewer Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalScrollBarVisibility="Auto" >
+            <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="382" >
+
+                <GroupBox Header="Загрузка данных" Margin="5" BorderThickness="1"  MaxWidth="200" Height="64" >
+                    <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" >
+                        <Button x:Name="btnLoadData" Width="172" Margin="5,8,5,10" Content="Открыть файл" VerticalContentAlignment="Center" Click="btnLoadData_Click" />
+                    </StackPanel>
+
+                </GroupBox>
+
+                <GroupBox Header="Шкала времени" Margin="5" BorderThickness="1"  MaxWidth="200" >
+                    <Slider x:Name="slider" Margin="0,12,0,0" IsEnabled="False"/>
+                </GroupBox>
+
+            </StackPanel>
+
+        </ScrollViewer>
+        <!--C-Scan Viewer-->
+        <oxy:PlotView x:Name="CscanView" Grid.Row="0" Grid.Column="1"  Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                      Background="AliceBlue" Model="{Binding oxyPlot.CScanModel}" SizeChanged="CscanView_SizeChanged"/>
+
+        <!--D-Scan Viewer-->
+        <oxy:PlotView x:Name="DscanView" Grid.Row="1" Grid.Column="1" Margin="0"
+                      Background="AliceBlue" Model="{Binding oxyPlot.DScanModel}" />
+
+    </Grid>
+</Window>
